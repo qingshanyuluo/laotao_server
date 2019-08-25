@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
 
-    boolean ismatching(String username, String password);
+    boolean ismatching(String email, String password);
 
-    boolean insert(String username, String password, String diplayName);
+    boolean insert(String email, String password, String diplayName);
 }

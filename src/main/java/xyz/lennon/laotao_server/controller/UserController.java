@@ -15,13 +15,13 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    RespResult<Boolean> login(@RequestParam String username, @RequestParam String password) {
-        return RespUtil.makeOKRsp(userService.ismatching(username, password));
+    RespResult<Boolean> login(@RequestParam String email, @RequestParam String password) {
+        return RespUtil.makeOKRsp(userService.ismatching(email, password));
     }
 
     @PostMapping("/register")
-    RespResult<Boolean> register(@RequestParam String username, @RequestParam String password, @RequestParam String displayName) {
-        return RespUtil.makeOKRsp(userService.insert(username, password, displayName));
+    RespResult<Boolean> register(@RequestParam String email, @RequestParam String password, @RequestParam String displayName) {
+        return RespUtil.makeOKRsp(userService.insert(email, password, displayName));
     }
 
 }

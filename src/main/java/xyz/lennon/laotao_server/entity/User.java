@@ -18,8 +18,8 @@ public class User {
     private Integer Id;
 
 
-    @Column(length = 20)
-    private String userName;
+    @Column(length = 20,updatable = true)
+    private String email;
 
     @Column(length = 20)
     private String password;
@@ -27,8 +27,8 @@ public class User {
     @Column(length = 20)
     private String displayName;
 
-    public User(String userName, String password, String displayName) {
-        this.userName = userName;
+    public User(String email, String password, String displayName) {
+        this.email = email;
         this.password = password;
         this.displayName = displayName;
     }

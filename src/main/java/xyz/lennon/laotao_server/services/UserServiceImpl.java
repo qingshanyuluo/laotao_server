@@ -13,14 +13,14 @@ public class UserServiceImpl implements UserService{
     private UserDao userDao;
 
 
-    public List<User> findAllUser(String username) {
-        return userDao.findAllByUserName(username);
+    public List<User> findAllUser(String email) {
+        return userDao.findAllByEmail(email);
     }
 
     @Override
-    public boolean ismatching(String username, String password) {
+    public boolean ismatching(String email, String password) {
         try {
-            return findAllUser(username).get(0).getPassword().equals(password);
+            return findAllUser(email).get(0).getPassword().equals(password);
         } catch (Exception e) {
             System.out.println(e);
             return false;
@@ -28,9 +28,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean insert(String username, String password, String displayName) {
+    public boolean insert(String email, String password, String displayName) {
         try {
-            userDao.saveAndFlush(new User(username, password, displayName));
+            userDao.saveAndFlush(new User(email, password, displayName));
             return true;
         } catch (Exception e) {
             return false;
