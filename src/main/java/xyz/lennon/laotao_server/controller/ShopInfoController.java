@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import xyz.lennon.laotao_server.dao.CommentDao;
 import xyz.lennon.laotao_server.dao.ShopDao;
 import xyz.lennon.laotao_server.entity.Comment;
+import xyz.lennon.laotao_server.entity.Shop;
 import xyz.lennon.laotao_server.result.RespResult;
 import xyz.lennon.laotao_server.result.RespUtil;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ShopInfoController {
@@ -21,6 +24,16 @@ public class ShopInfoController {
 
     @Autowired
     private ShopDao shopDao;
+
+    @GetMapping("/homeShop")
+    public RespResult<List<Shop>> homeShop() {
+        return RespUtil.makeOKRsp(shopDao.findAll());
+    }
+
+    @GetMapping("/shop/{shopID}/info")
+    public RespResult<Optional<Shop>> getShopInfo(@PathVariable(value = "shopID") Long shopId) {
+        return RespUtil.makeOKRsp(shopDao.findById(shopId));
+    }
 
     @GetMapping("/shop/{shopId}/comments")
     public RespResult<Page<Comment>> getAllCommentsByShopId(@PathVariable(value = "shopId") Long shopId,

@@ -34,4 +34,25 @@ public class Shop {
 
     @Column
     private Integer uploaderId;
+
+    @Column
+    @Lob
+    private String content;
+
+    public Shop(String name, String location, Integer cost, Integer rankStar, String type, Integer liked, Integer uploaderId, String content) {
+        this.name = name;
+        this.location = location;
+        this.cost = cost;
+        this.rankStar = rankStar;
+        this.type = type;
+        this.liked = liked;
+        this.uploaderId = uploaderId;
+        this.content = content;
+    }
+
+    public Shop(){}
+
+    public Long getId() {
+        return id;
+    }
 }

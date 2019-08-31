@@ -39,4 +39,15 @@ public class Comment {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    public Comment(String content, Integer liked, Long userId, Shop shop) {
+        this.content = content;
+        this.liked = liked;
+        this.userId = userId;
+        this.shop = shop;
+    }
+
+    public Comment() {
+
+    }
 }
