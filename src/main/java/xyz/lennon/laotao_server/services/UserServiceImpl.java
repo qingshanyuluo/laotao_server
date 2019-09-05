@@ -18,6 +18,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public Integer getUserId(String username) {
+        return userDao.findAllByEmail(username).get(0).getId();
+    }
+
+    @Override
     public boolean ismatching(String email, String password) {
         try {
             return findAllUser(email).get(0).getPassword().equals(password);

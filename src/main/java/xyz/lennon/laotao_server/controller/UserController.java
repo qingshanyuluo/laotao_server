@@ -8,6 +8,9 @@ import xyz.lennon.laotao_server.result.RespResult;
 import xyz.lennon.laotao_server.result.RespUtil;
 import xyz.lennon.laotao_server.services.UserService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 public class UserController {
 
@@ -15,13 +18,29 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    RespResult<Boolean> login(@RequestParam String email, @RequestParam String password) {
-        return RespUtil.makeOKRsp(userService.ismatching(email, password));
+    RespResult<Map<String, Object>> login(@RequestParam String email, @RequestParam String password) {
+        Map<String, Object> res = new HashMap<>();
+        boolean ismatch = userService.ismatching(email, password);
+        if (ismatch) {
+            res.put("isMatch", true);
+            res.put("userId", userService.getUserId(email));
+        } else {
+            res.put("isMatch", false);
+        }
+        return RespUtil.makeOKRsp(res);
     }
 
     @PostMapping("/register")
-    RespResult<Boolean> register(@RequestParam String email, @RequestParam String password, @RequestParam String displayName) {
-        return RespUtil.makeOKRsp(userService.insert(email, password, displayName));
+    RespResult<Map<String, Object>> register(@RequestParam String email, @RequestParam String password, @RequestParam String displayName) {
+        Map<String, Object> res = new HashMap<>();
+        boolean isSuccess = userService.insert(email, password, displayName);
+        if (isSuccess) {
+            res.put("isSuccess", true);
+            res.put("userId", userService.getUserId(email));
+        } else {
+            res.put("isSuccess", false);
+        }
+        return RespUtil.makeOKRsp(res);
     }
 
 }
